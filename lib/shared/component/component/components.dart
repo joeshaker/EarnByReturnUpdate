@@ -178,7 +178,7 @@ Widget defaultTextButton({
   TextDecoration? decoration,
 }) =>
     TextButton(
-      
+
       onPressed: function,
       style: ButtonStyle(
 
@@ -186,7 +186,7 @@ Widget defaultTextButton({
       ),
       child: Text(
         style: TextStyle(
-          
+
           decoration: decoration,
           color: color,
           fontSize: fontSize
@@ -270,7 +270,7 @@ class mapItems{
 
 }
 
-Widget  mapItem (
+Widget  mapItemm (
     {required String itemName,
       required int itemDistance,
       required BuildContext context,
@@ -434,6 +434,182 @@ Widget  mapItem (
           //     ),
           //   ),
           // )
+        ],
+      ),
+    ),
+  )
+
+  ;
+
+
+
+}
+
+Widget  mapItem (
+    {required String itemName,
+      required int itemDistance,
+      required BuildContext context,
+      required double currentLat,
+      required double currentLang,
+      required double itmeLat,
+      required double   itemLang,
+    }
+    ){
+
+  return  Container(
+    margin: EdgeInsets.symmetric(horizontal: 30),
+    height: 150,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white),
+    child: Padding(
+      padding: EdgeInsetsDirectional.symmetric(
+          vertical: 20, horizontal: 15),
+      child: Row(
+        crossAxisAlignment:
+        CrossAxisAlignment.end,
+        mainAxisAlignment:
+        MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
+            children: [
+              Text(
+                itemName,
+                // '${machines[index]['name']}',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Colors
+                      .black, // Set desired text color
+                  decoration: TextDecoration
+                      .none, // Remove underline
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "$itemDistance km",
+                // "${machines[index]['distance']} km",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w300,
+                  color: defaultColor,
+                  decoration: TextDecoration
+                      .none, // Remove underline
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 85,
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius.circular(20),
+                    color: defaultColor),
+                child: Center(
+                  child: Text(
+                    "27/7 Access",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 10,
+                      color: Colors.white,
+                      decoration:
+                      TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: 100,
+
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius.circular(20),
+                    color: defaultColor),
+                child: Center(
+                  child: Text(
+                    "Public Access",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10,
+                      color: Colors.white,
+                      decoration: TextDecoration
+                          .none, // Remove underline
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius:
+              BorderRadius.circular(20),
+            ),
+            child: ElevatedButton
+              (
+
+
+              style: ButtonStyle(
+
+
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      defaultColor // Replace 0xFF00FF00 with your hex color value
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+
+                      )
+                  )
+              ),
+
+
+              onPressed: () {
+                MapsSheet.show(
+                  context: context,
+                  onMapTap: (map) {
+                    map.showDirections(
+                      destination: Coords(
+                        // machines[index]['lat'],
+                          itmeLat,
+                          itemLang
+                        // machines[index]['lang'],
+                      ),
+                      destinationTitle:itemName,
+                      origin: Coords(currentLat, currentLang),
+                      originTitle: 'current location',
+
+
+                      directionsMode: DirectionsMode.driving,
+                    );
+                  },
+                );
+              },
+
+              child: Row(
+                children: [
+                  Icon(CupertinoIcons.location,
+                      color: Colors.white),
+                  SizedBox(width: 7,),
+                  Text('GO',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight:
+                          FontWeight.bold))
+                ],
+              ),
+            ),
+          )
         ],
       ),
     ),

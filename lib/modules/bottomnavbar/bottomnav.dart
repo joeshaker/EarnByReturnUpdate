@@ -5,7 +5,9 @@ import 'package:earn_by_return/modules/mywallet_recycle/Mywallet.dart';
 import 'package:flutter/material.dart';
 
 import '../Redeem/Redeem.dart';
+import '../map/map_screen.dart';
 import '../profile/Profile.dart';
+import '../qr_code/qrcode_screen.dart';
 
 class Bottonav extends StatefulWidget {
   const Bottonav({super.key});
@@ -19,8 +21,8 @@ class _BottonavState extends State<Bottonav> {
   int _selectedIndex = 0;
   List _pages = <Widget>[
     Homescreen(),
-    MyWallet(),
-    QrScreen(),
+    MapScreen(),
+    QRViewExample(),
     Redeemscreen(),
     ProflieScreen()
   ];

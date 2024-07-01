@@ -72,40 +72,6 @@ class _HistoryscreenState extends State<Historyscreen> {
                       child: Icon(
                           Icons.keyboard_double_arrow_left_outlined, size: 32)),
                 ),
-                // bottomNavigationBar: BottomNavigationBar(
-                //   selectedFontSize: 20,
-                //   selectedIconTheme: IconThemeData(size: 40),
-                //   selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-                //   items: const <BottomNavigationBarItem>[
-                //     BottomNavigationBarItem(
-                //       icon: Icon(Icons.home),
-                //       label: 'Home',
-                //     ),
-                //     BottomNavigationBarItem(
-                //       icon: Icon(Icons.location_on),
-                //       label: 'Location',
-                //     ),
-                //     BottomNavigationBarItem(
-                //       icon: Icon(Icons.qr_code_scanner),
-                //       label: 'Barcode',
-                //     ),
-                //     BottomNavigationBarItem(
-                //       icon: Icon(Icons.card_giftcard_outlined),
-                //       label: 'Gift',
-                //     ),
-                //     BottomNavigationBarItem(
-                //       icon: Icon(Icons.person_pin),
-                //       label: 'Profile',
-                //     ),
-                //
-                //   ],
-                //   currentIndex: _selectedIndex,
-                //   onTap: (int index) {
-                //     setState(() {
-                //       _selectedIndex = index;
-                //     });
-                //   },
-                // ),
                 body: SingleChildScrollView(
                   child: Column(
                     // mainAxisAlignment: MainAxisAlignment.start,
@@ -117,7 +83,7 @@ class _HistoryscreenState extends State<Historyscreen> {
                       ),
                       SizedBox(height: 30,),
                       Container(
-                        height: 700,
+                        height: 640,
                         child: ListView.separated(
                             itemBuilder: (context, index) =>
                             buildContainerHistory(index),

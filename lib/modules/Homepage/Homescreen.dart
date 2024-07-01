@@ -169,7 +169,7 @@ class _HomescreenState extends State<Homescreen> {
                             scrollDirection: Axis.horizontal,
                             itemCount: item.length,
                             itemBuilder: (BuildContext context, int index)=>
-                                mapItem(itemName: item[index].name, itemDistance:item[index].distance, context: context, currentLat: 20, currentLang: 30, itmeLat: 20, itemLang: 10),
+                                mapItemm(itemName: item[index].name, itemDistance:item[index].distance, context: context, currentLat: 20, currentLang: 30, itmeLat: 20, itemLang: 10),
                             separatorBuilder: (BuildContext context, int index) =>SizedBox(width: 5,)
                         ),
                       ),
