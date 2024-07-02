@@ -39,7 +39,6 @@ class LoginScreen extends StatelessWidget {
                       key: 'token', value: state.loginModel.token)
                   .then((value) {
                 navigateAndFinish(context,  Bottonav());
-
               });
             }
             else {

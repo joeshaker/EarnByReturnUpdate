@@ -32,8 +32,6 @@ class LoginCubit extends Cubit<Loginstates> {
       // if(error.response.statusCode==401){
       //   emit(LoginErrorstate(error.toString(),));
       // }
-
-
       emit(LoginErrorstate(error.toString(),error.response.data['message']));
     });
 

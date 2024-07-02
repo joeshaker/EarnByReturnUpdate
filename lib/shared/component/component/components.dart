@@ -38,6 +38,10 @@ class Details{
   Details({required this.text1,
     required this.img});
 }
+class CongTexts{
+  late String text1;
+  CongTexts({required this.text1,});
+}
 
 class ProfileModel {
   final String text1;
