@@ -5,7 +5,6 @@ abstract class CongratVoucherState {}
 
 class CongratVoucherInitial extends CongratVoucherState {}
 class CongratVoucherLoding extends CongratVoucherState {}
-class  CongratVoucherButtonClickablestate extends CongratVoucherState {}
 class  CongratVoucherSuccessstate extends CongratVoucherState {
   final VoucherModelDetail Cograt;
   CongratVoucherSuccessstate(this.Cograt);

@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               debugShowCheckedModeBanner: false,
-              home:CongVoucher()
+              home:Bottonav()
 
             // home: CheckEmailScreen(email: "Sohila123@gmail.com",),
             // home: CheckEmailScreen(email: 'sohila@gmail.com',comeFrom:'RegisterScreen' ),

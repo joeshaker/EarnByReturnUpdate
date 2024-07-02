@@ -20,6 +20,8 @@ String?  id;
 String ? merchant_id;
 String ? Transaction_id;
 String ? merchant_photo;
+String ? Voucher_id;
+String ? Voucher_photo;
 List gift=[];
 List<String> gift_id=[];
 

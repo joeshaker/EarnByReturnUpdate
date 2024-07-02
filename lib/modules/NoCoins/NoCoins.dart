@@ -1,3 +1,4 @@
+import 'package:earn_by_return/modules/map/map_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/component/component/components.dart';
@@ -19,14 +20,18 @@ class _NoCoinsScreenState extends State<NoCoinsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Icon(Icons.clear, color: Colors.black,),
-        ),
-      ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 80.0,right: 260),
+            child: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child:
+              Icon(Icons.clear, color: Colors.black,size: 30,),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 70.0),
             child: Center(
@@ -52,20 +57,25 @@ class _NoCoinsScreenState extends State<NoCoinsScreen> {
             ),
           ),
           SizedBox(height: 20,),
-          Center(
-            child: Container(
-              width: 276,
-              height: 62,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.green
-              ),
-              child: Center(
-                child: Text('Find nearest machine', style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                  color: Colors.white
-                ),),
+          InkWell(
+            onTap: (){
+              navigateTo(context, MapScreen());
+            },
+            child: Center(
+              child: Container(
+                width: 276,
+                height: 62,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.green
+                ),
+                child: Center(
+                  child: Text('Find nearest machine', style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    color: Colors.white
+                  ),),
+                ),
               ),
             ),
           )

@@ -1,4 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:earn_by_return/modules/Congrat_Voucher/CongratVoucher.dart';
+import 'package:earn_by_return/modules/NoCoins/NoCoins.dart';
 import 'package:earn_by_return/modules/Redeem/Cubit/redeem_cubit.dart';
 import 'package:earn_by_return/modules/voucher/cubit/voucher_cubit.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../shared/component/component/components.dart';
 import '../../shared/component/component/constants.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../profile/cubit/profile_cubit.dart';
 
 class VoucherScreen extends StatefulWidget {
@@ -194,7 +197,12 @@ class _VoucherScreenState extends State<VoucherScreen> {
   }
 }
 Widget BuildItem(int index) {
-  return BlocConsumer<VoucherCubit, VoucherState>(
+  return BlocConsumer<ProfileCubit, ProfileState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return BlocConsumer<VoucherCubit, VoucherState>(
   listener: (context, state) {
     // TODO: implement listener
   },
@@ -253,24 +261,41 @@ Widget BuildItem(int index) {
           ),
         ),
         SizedBox(height: 5),
-        Container(
-          width: 100,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.green,
-            borderRadius: BorderRadius.circular(20)
-          ),
-          child: Center(
-            child: Text("Redeem",style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Colors.white
-            ),),
+        InkWell(
+          onTap: (){
+            CacheHelper.saveData(key: '_id', value: VoucherCubit.get(context).voucher!.data[index].id);
+            Voucher_id=CacheHelper.getData(key: '_id');
+            CacheHelper.saveData(key: 'voucherPhoto', value: VoucherCubit.get(context).voucher!.data[index].voucherPhoto);
+            Voucher_photo=CacheHelper.getData(key: 'voucherPhoto');
+            print(Voucher_id);
+            if(ProfileCubit.get(context).users!.data[0].wallet.coins >= VoucherCubit.get(context).voucher!.data[index].voucherPoints){
+              navigateTo(context,CongVoucher());
+            }
+            else{
+              navigateTo(context, NoCoinsScreen());
+            }
+          },
+          child: Container(
+            width: 100,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Center(
+              child: Text("Redeem",style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Colors.white
+              ),),
+            ),
           ),
         )
       ],
     ),
   );
+  },
+);
   },
 );
 }
