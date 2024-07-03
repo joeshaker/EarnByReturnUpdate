@@ -212,7 +212,7 @@ class MapScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return Container(
                             margin: EdgeInsets.symmetric(horizontal: 30),
-                            height: 150,
+                            height: 160,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.white),
@@ -309,8 +309,6 @@ class MapScreen extends StatelessWidget {
                                     ),
                                     child: ElevatedButton
                                       (
-
-
                                       style: ButtonStyle(
 
 

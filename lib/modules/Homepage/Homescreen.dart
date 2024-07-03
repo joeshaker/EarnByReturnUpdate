@@ -69,7 +69,7 @@ class _HomescreenState extends State<Homescreen> {
             children: [
               Container(
                 width: 440,
-                height: 100,
+
                 // color: Colors.green,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,7 +119,7 @@ class _HomescreenState extends State<Homescreen> {
               ),
               Container(
                 width:double.infinity,
-                height:930,
+
                 color: Colors.green[100],
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -163,7 +163,7 @@ class _HomescreenState extends State<Homescreen> {
                       SizedBox(height: 10,),
                       Container(
                         width: double.infinity,
-                        height: 140,
+                        height: 160,
                         // color: Colors.white,
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,

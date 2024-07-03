@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../shared/component/component/components.dart';
 import '../../shared/network/local/cache_helper.dart';
+import '../BottomnavAdmin/BottomnavAdmine.dart';
 import '../history/History.dart';
 import '../profile/Profile.dart';
 import '../register/register_screen.dart';
@@ -39,9 +40,15 @@ class LoginScreen extends StatelessWidget {
               CacheHelper.saveData(
                       key: 'token', value: state.loginModel.token)
                   .then((value) {
-                navigateAndFinish(context,  Bottonav());
-                // CacheHelper.saveData(key: 'role', value: state.loginModel.data!.role);
-                // print(Role);
+                    if(state.loginModel.data!.role=="admin"){
+                      navigateAndFinish(context, BottomNavAdmin());
+                      CacheHelper.saveData(key: 'role', value: state.loginModel.data!.role);
+                      print(Role);
+                    }else{
+                      navigateAndFinish(context,  Bottonav());
+                    }
+
+
               });
             }
             else {

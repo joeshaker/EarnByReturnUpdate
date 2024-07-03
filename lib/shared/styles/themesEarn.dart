@@ -48,9 +48,6 @@ ThemeData darkTheme = ThemeData(
         color: Colors.white
 
     ),
-
-
-
   ),
   fontFamily: 'poppins',
 
@@ -93,7 +90,10 @@ ThemeData lightTheme =  ThemeData(
 
   ),
 
-  
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: defaultColor,
+
+  ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: HexColor('#97CE5E')
   ),

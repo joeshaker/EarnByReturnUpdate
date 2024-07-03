@@ -75,12 +75,12 @@ class _All_transactionState extends State<All_transaction> {
       },
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
             width: double.infinity,
-            height: 100,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(35),
               color: Colors.grey[200],
               border: Border.all(
                   color:AllTransactionCubit.get(context).colors[index],
@@ -124,7 +124,7 @@ class _All_transactionState extends State<All_transaction> {
                         width: 70,
                         height: 30,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(10),
                           color: AllTransactionCubit.get(context).colors[index],
                         ),
                         child: Center(

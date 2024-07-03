@@ -17,6 +17,8 @@ double horizontalPadding=20.0;
 double verticalPadding=10;
 String?  token;
 String?  Role;
+String?  selectedRole;
+
 String?  id;
 String ? merchant_id;
 String ? Transaction_id;

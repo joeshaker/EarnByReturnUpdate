@@ -288,7 +288,7 @@ Widget  mapItemm (
   return  Container(
     width: 170,
     margin: EdgeInsets.symmetric(horizontal: 10),
-    height: 150,
+    height: 180,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white),
@@ -462,7 +462,7 @@ Widget  mapItem (
 
   return  Container(
     margin: EdgeInsets.symmetric(horizontal: 30),
-    height: 150,
+    height: 160,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white),

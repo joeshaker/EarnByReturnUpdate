@@ -12,6 +12,7 @@ import '../../model/UserModel.dart';
 import '../../shared/component/component/components.dart';
 import '../../shared/component/component/constants.dart';
 import '../../shared/network/remote/dio_helper.dart';
+import '../bottomnavbar/bottomnav.dart';
 import '../history/History.dart';
 import '../mywallet_recycle/Mywallet.dart';
 import 'cubit/profile_cubit.dart';
@@ -34,8 +35,9 @@ class _ProflieScreenState extends State<ProflieScreen> {
     MyWallet(),
     MyWallet(),
     MyWallet(),
+    BottomNavAdmin(),
     MyWallet(),
-    LoginScreen(),
+
   ];
 
   List<ProfileModel> Profile = [
@@ -79,16 +81,20 @@ class _ProflieScreenState extends State<ProflieScreen> {
       icon: Icons.wifi_calling_3_outlined,
       shouldNavigate: false,
     ),
+
     ProfileModel(
-      text1: 'FQA',
-      icon: Icons.question_mark_sharp,
-      shouldNavigate: false,
+      text1:selectedRole=="admin"? 'Act as user':"Act as admin",
+      icon: Icons.swap_horiz_rounded,
+      shouldNavigate: Role=="admin"?true:false,
     ),
+
     ProfileModel(
       text1: 'Logout',
       icon: Icons.logout_outlined,
       shouldNavigate: true,
     ),
+
+
   ];
   // void _updateProfileList() {
   //   if (Role == "admin") {
@@ -132,6 +138,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
                       color: Colors.grey[300],
                       child: Row(
                         children: [
+                          SizedBox(width: 20,),
                           CircleAvatar(
                             backgroundImage: AssetImage('assets/images/Person.png'),
                             radius: 40,
@@ -145,7 +152,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
                                 'Welcome',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                 ),
                               ),
                               SizedBox(height: 5),
@@ -175,10 +182,24 @@ class _ProflieScreenState extends State<ProflieScreen> {
                           child: InkWell(
                             onTap: () {
                               if (Profile[index].shouldNavigate??true) {
+
                                 if(Profile[index].text1=="Logout"){
                                   CacheHelper.clearData(key: 'token');
                                 }
-                                navigateTo(context, Screens[index]);
+                                if(index==Profile.length-2){
+                                  if(selectedRole!="admin"){
+                                    selectedRole="admin";
+                                    navigateTo(context, BottomNavAdmin());
+                                  }else{
+                                    selectedRole="user";
+                                    navigateTo(context, Bottonav());
+
+                                  }
+
+                                }else{
+                                  navigateTo(context, Screens[index]);
+                                }
+
                               }
                             },
                             child: buildCenter(Profile[index]),

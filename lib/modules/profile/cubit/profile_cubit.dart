@@ -20,6 +20,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoading());
     DioHelper.getData(url:'api/v1/user/me',token: token).then((value){
       print(value.data);
+      print("frommmmm profileee");
       users = ApiResponse.fromJson(value.data);
       print(users.toString());
       // print(users.data[1]);

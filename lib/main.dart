@@ -42,6 +42,8 @@ void main() async{
   bool? darkMode = CacheHelper.getData(key: 'darkMode');
   bool? onBoarding =CacheHelper.getData(key: 'onBoarding');
   token =CacheHelper.getData(key: 'token');
+  Role = CacheHelper.getData(key: 'role');
+  selectedRole=Role;
   // Role=CacheHelper.getData(key: 'role');
   id=CacheHelper.getData(key: '_id');
   Widget widget=Text("data") ;
