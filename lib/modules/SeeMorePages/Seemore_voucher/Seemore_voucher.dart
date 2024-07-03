@@ -166,24 +166,19 @@ class Seemore_voucher extends StatelessWidget {
             ],
           )
       ),
-      fallback:(context)=>Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                    Icons.keyboard_double_arrow_left_outlined, size: 32)),
-          ),
+      fallback:(context)=>
+          Scaffold(
+          // appBar: AppBar(
+          //   leading: InkWell(
+          //       onTap: () {
+          //         Navigator.pop(context);
+          //       },
+          //       child: Icon(
+          //           Icons.keyboard_double_arrow_left_outlined, size: 32)),
+          // ),
           body:
-          SeeMoreVoucherCubit.get(context).voucher==null?Center(child: CircularProgressIndicator(),):
-          Center(
-            child: Text("No History Available",style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.grey
-            ),),
-          )
+          Center(child: CircularProgressIndicator(
+          ),)
 
       ),
     );

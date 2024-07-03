@@ -61,7 +61,7 @@ class _All_transactionState extends State<All_transaction> {
                 ],
               ),
             ),
-            fallback:(context)=>Center(child: CircularProgressIndicator(),) ,
+            fallback:(context)=>Scaffold(body:Center(child: CircularProgressIndicator(),)) ,
           );
         },
       ),

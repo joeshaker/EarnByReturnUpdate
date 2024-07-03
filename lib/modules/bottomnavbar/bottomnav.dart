@@ -27,7 +27,8 @@ class _BottonavState extends State<Bottonav> {
     ProflieScreen()
   ];
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         // selectedFontSize: 20,
         // selectedIconTheme: IconThemeData(size: 40),

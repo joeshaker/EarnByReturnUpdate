@@ -127,7 +127,20 @@ class _MyWalletState extends State<MyWallet> {
     )
 
     ),
-      fallback:(context)=>Center(child: CircularProgressIndicator()) ,
+      fallback:(context)=>Scaffold(
+        // appBar: AppBar(
+        //   leading: InkWell(
+        //       onTap: () {
+        //         Navigator.pop(context);
+        //       },
+        //       child: Icon(
+        //           Icons.keyboard_double_arrow_left_outlined, size: 32)),
+        // ),
+          body:
+          Center(child: CircularProgressIndicator(
+          ),)
+
+      ),
 
     );
   },

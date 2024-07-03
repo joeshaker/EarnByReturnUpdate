@@ -23,6 +23,7 @@ class UserData {
   late String image;
   late int points;
   late int credit ;
+  late String role;
 
 
   UserData.fromJson(Map<String, dynamic> json) //named constructor
@@ -31,6 +32,7 @@ class UserData {
     name = json['name'];
     email = json['email']; //عشان بعدد كده اقدر استخرج منه بقي
     phone = json['phoneNumber'];
+    role=json['role'];
     // image = json['image'];
     // points = json['points']!=null? json['points']:0;
     // credit = json['credit']!=null? json['credit']:0;

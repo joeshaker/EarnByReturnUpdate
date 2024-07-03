@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import 'modules/Admin/All transactions/TransactionAll.dart';
+import 'modules/BottomnavAdmin/BottomnavAdmine.dart';
 import 'modules/Congrat_Voucher/CongratVoucher.dart';
 import 'modules/Homepage/Homescreen.dart';
 import 'modules/Redeem/Redeem.dart';
@@ -93,7 +94,7 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               debugShowCheckedModeBanner: false,
-              home:DashboardScreen()
+              home:BottomNavAdmin()
 
             // home: CheckEmailScreen(email: "Sohila123@gmail.com",),
             // home: CheckEmailScreen(email: 'sohila@gmail.com',comeFrom:'RegisterScreen' ),

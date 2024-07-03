@@ -100,23 +100,16 @@ class _HistoryscreenState extends State<Historyscreen> {
             ),
             fallback:(context)=>
                 Scaffold(
-                appBar: AppBar(
-                  leading: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                          Icons.keyboard_double_arrow_left_outlined, size: 32)),
-                ),
+                // appBar: AppBar(
+                //   leading: InkWell(
+                //       onTap: () {
+                //         Navigator.pop(context);
+                //       },
+                //       child: Icon(
+                //           Icons.keyboard_double_arrow_left_outlined, size: 32)),
+                // ),
                 body:
-                historyCubit.vou==0?
-                Center(
-                  child: Text("No History Available",style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.grey
-                  ),),
-                ):Center(child: CircularProgressIndicator(),)
+                Center(child: CircularProgressIndicator(),)
             ),
           );
         },
