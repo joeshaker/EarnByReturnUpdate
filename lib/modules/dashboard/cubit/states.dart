@@ -8,6 +8,8 @@ class  DashboardInitalstate extends Dashboardstates {}
 
 class  DashboardLoadingstate extends Dashboardstates {}
 class  DashboardDataCreatedstate extends Dashboardstates {}
+class  DashboardChangSelectedstate extends Dashboardstates {}
+
 
 class  DashboardSuccessstate extends Dashboardstates {
   final String message;

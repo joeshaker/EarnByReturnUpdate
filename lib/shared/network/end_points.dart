@@ -5,4 +5,5 @@ const RESETPASS='api/v1/user/resetPassword/';
 const CHECKEMAIL = 'api/v1/user/resetVerification';
 const CHANGEPASS = 'api/v1/user/updateMyPassword';
 const ADDGIFT =   'api/v1/wallet/transactions/add-gift';
+const DASHBOARD='api/v1/buissness/total';
 

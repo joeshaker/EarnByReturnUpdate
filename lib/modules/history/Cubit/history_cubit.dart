@@ -27,10 +27,10 @@ class HistoryCubit extends Cubit<HistoryState> {
     DioHelper.getData(url:'api/v1/user/myTransactions',token: token).then((value){
       print(value.data);
       vou = History.fromJson(value.data);
-      print(vou.toString());
-      print(vou!.results);
-      print(vou!.transaction[0].voucher!.voucherid);
-      print(vou!.transaction[1].id);
+      // print(vou.toString());
+      // print(vou!.results);
+      // print(vou!.transaction[0].voucher!.voucherid);
+      // print(vou!.transaction[1].id);
       // print(users.data[1]);
       // print(voucher!.data);
       // print(voucher!.data[0].name);

@@ -74,23 +74,20 @@ class Seemore_voucher extends StatelessWidget {
                           color: Colors.black
                       ),),
                       SizedBox(height: 15,),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 200.0),
-                        child: Column(
-                          children: [
-                            Text('Transaction Id',style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
-                                color: Colors.black
-                            ),),
-                            SizedBox(height: 5,),
-                            Text('${Transaction_id}',style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.grey[500]
-                            ),),
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          Text('Transaction Id',style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18,
+                              color: Colors.black
+                          ),),
+                          SizedBox(height: 5,),
+                          Text('${Transaction_id}',style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: Colors.grey[500]
+                          ),),
+                        ],
                       ),
                       SizedBox(height: 20,),
                       Column(
@@ -169,7 +166,26 @@ class Seemore_voucher extends StatelessWidget {
             ],
           )
       ),
-      fallback:(context)=>Center(child:CircularProgressIndicator(),),
+      fallback:(context)=>Scaffold(
+          appBar: AppBar(
+            leading: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                    Icons.keyboard_double_arrow_left_outlined, size: 32)),
+          ),
+          body:
+          SeeMoreVoucherCubit.get(context).voucher==null?Center(child: CircularProgressIndicator(),):
+          Center(
+            child: Text("No History Available",style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.grey
+            ),),
+          )
+
+      ),
     );
   },
 ),

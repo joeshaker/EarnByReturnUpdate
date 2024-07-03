@@ -62,8 +62,9 @@ class _HistoryscreenState extends State<Historyscreen> {
         },
         builder: (context, state) {
           return ConditionalBuilder(
-            condition:historyCubit.vou!=null ,
-            builder: (context)=>Scaffold(
+            condition:historyCubit.vou!=null &&historyCubit.vou!=0,
+            builder: (context)=>
+                Scaffold(
                 appBar: AppBar(
                   leading: InkWell(
                       onTap: () {
@@ -97,7 +98,26 @@ class _HistoryscreenState extends State<Historyscreen> {
                 )
 
             ),
-            fallback:(context)=>Center(child: CircularProgressIndicator(),) ,
+            fallback:(context)=>
+                Scaffold(
+                appBar: AppBar(
+                  leading: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                          Icons.keyboard_double_arrow_left_outlined, size: 32)),
+                ),
+                body:
+                historyCubit.vou==0?
+                Center(
+                  child: Text("No History Available",style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey
+                  ),),
+                ):Center(child: CircularProgressIndicator(),)
+            ),
           );
         },
       ),

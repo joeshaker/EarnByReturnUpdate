@@ -1,4 +1,3 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:earn_by_return/modules/dashboard/cubit/cubit.dart';
 import 'package:earn_by_return/modules/dashboard/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -17,32 +16,28 @@ class ChartData {
 class DashboardScreen extends StatelessWidget {
   final List<String> list = <String>[
     'Last 7 days',
-    'Last 1 month',
-    'Last 3 months',
-    'Last 6 months'
+    'Total Data',
+
   ];
-  final List<ChartData> chartData = [
-    ChartData('David', 25),
-    ChartData('Steve', 38),
-    ChartData('Jack', 34),
-    ChartData('Others', 52)
-  ];
+
   final double width = 7;
-  late List<BarChartGroupData> rawBarGroups;
-  late List<BarChartGroupData> showingBarGroups;
+  late List<BarChartGroupData> rawBarGroupsBC;
+
+  late List<BarChartGroupData> showingBarGroupsBC;
+  late List<BarChartGroupData> rawBarGroupsGV;
+  late List<BarChartGroupData> showingBarGroupsGV;
 
   Widget indicatorCircle({
     required String text,
     required Color color,
     required double factorWidth,
     required double factorHeight,
-
   }) {
     return Row(
       children: <Widget>[
         Container(
-          width: 6 *factorWidth,
-          height: 6 *factorHeight,
+          width: 6 * factorWidth,
+          height: 6 * factorHeight,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: color,
@@ -67,15 +62,14 @@ class DashboardScreen extends StatelessWidget {
     required double factorHeight,
   }) {
     return Column(
-
       children: [
         Image.asset(
           image,
           fit: BoxFit.cover,
-          height: 120 *factorHeight ,
-          width: 60 *factorWidth,
+          height: 120 * factorHeight,
+          width: 60 * factorWidth,
         ),
-        SizedBox(height: 13 *factorHeight) ,
+        SizedBox(height: 13 * factorHeight),
         Text(
           title,
           style: TextStyle(
@@ -119,24 +113,19 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget itemSquare({
     required String heading,
     required String title,
     required String image,
     required String profit,
-
     required double factorWidth,
     required double factorHeight,
-
-
-
-
-  }){
-    return  Container(
-      padding:
-      EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: 185 * factorWidth,
-      height:  140*factorHeight,
+      height: 140 * factorHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.green),
@@ -146,12 +135,10 @@ class DashboardScreen extends StatelessWidget {
             color: Colors.grey.withOpacity(0.35),
             spreadRadius: 3,
             blurRadius: 3,
-
           ),
         ],
       ),
       child: Column(
-
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
@@ -160,13 +147,18 @@ class DashboardScreen extends StatelessWidget {
               Image.asset(
                 "$image",
                 width: 40 * factorWidth,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 height: 40 * factorHeight,
               ),
               Container(
-                width: 47 * factorWidth,
+                padding: EdgeInsets.all(2),
+
+                constraints: BoxConstraints(
+                    minWidth:47 * factorWidth
+                ),
                 decoration: BoxDecoration(
                   color: Colors.green,
+
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -182,14 +174,12 @@ class DashboardScreen extends StatelessWidget {
               ),
             ],
           ),
-
           itemBoldText(text: heading),
-
           itemTitleText(text: title),
         ],
       ),
     );
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +187,11 @@ class DashboardScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double factorWidth = width / 430;
     double factorHeight = height / 932;
-   bool loading =true;
+    List topMerchant =[];
+    bool loading = true;
+    double totalRedeems =0;
+    final List<Color> colors = [HexColor("625A94"), HexColor("#FFDE59"), HexColor("#A4EB77"), HexColor("#FFBB8F"), Colors.grey];
+
 
     return BlocProvider(
       create: (context) => DashboardCubit(),
@@ -206,31 +200,51 @@ class DashboardScreen extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+          Map data = DashboardCubit.get(context).last7Days;
+          Map totalData = DashboardCubit.get(context).totalData;
+
+          Map percentage = DashboardCubit.get(context).percentage;
+          topMerchant= DashboardCubit.get(context).topMerchants;
+          bool last7days = DashboardCubit.get(context).last7DaysCheck;
+
           if (state is DashboardInitalstate) {
             DashboardCubit.get(context).createGroupData();
-            showingBarGroups = DashboardCubit.get(context).showingBarGroups;
+            showingBarGroupsBC = DashboardCubit.get(context).showingBarGroupsBC;
+            showingBarGroupsGV = DashboardCubit.get(context).showingBarGroupsGV;
+
           }
           if (state is DashboardDataCreatedstate) {
             loading = false;
             // Assign showingBarGroups after data is created
-            showingBarGroups = DashboardCubit.get(context).showingBarGroups;
+            showingBarGroupsBC = DashboardCubit.get(context).showingBarGroupsBC;
+            showingBarGroupsGV = DashboardCubit.get(context).showingBarGroupsGV;
+            topMerchant= DashboardCubit.get(context).topMerchants;
+
+            final double totalRedeems = topMerchant.fold<double>(0.0, (sum, merchant) {
+              final num noOfRedeems = merchant['noOfRedeems'] ?? 0; // Ensure it's a number and not null
+              return sum + noOfRedeems.toDouble();
+            });
+
+            data = DashboardCubit.get(context).last7Days;
+            totalData = DashboardCubit.get(context).totalData;
+            percentage = DashboardCubit.get(context).percentage;
           }
           // 4""
           // Check if showingBarGroups is null (not initialized yet)
-          if (showingBarGroups == null) {
+          if (showingBarGroupsBC == null) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: defaultColor,
+              ),
             );
           }
 
-
-
           return Scaffold(
-            body: loading ? CircularProgressIndicator():
-
-            SingleChildScrollView(
+            body: !loading
+                ? SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
+                padding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -248,14 +262,15 @@ class DashboardScreen extends StatelessWidget {
                           if (newValue != null) {
                             dropdownValue = newValue;
                           }
+                          DashboardCubit.get(context).changSelected();
                         },
-                        items:
-                            list.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        items: list.map<DropdownMenuItem<String>>(
+                                (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
                         dropdownColor: Colors.white,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(
@@ -292,28 +307,31 @@ class DashboardScreen extends StatelessWidget {
                                 color: Colors.grey.withOpacity(0.35),
                                 spreadRadius: 3,
                                 blurRadius: 3,
-
                               ),
                             ],
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
                             children: [
                               itemBoldText(text: "Bin Capacity"),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
                                 children: [
                                   capacityItem(
                                     factorHeight: factorHeight,
                                     factorWidth: factorWidth,
-                                    image: 'assets/images/cansCapcity.png',
+                                    image:
+                                    'assets/images/cansCapcity.png',
                                     title: "cans",
                                   ),
                                   SizedBox(width: 15),
                                   capacityItem(
                                     factorHeight: factorHeight,
                                     factorWidth: factorWidth,
-                                    image: 'assets/images/bottleCapcity.png',
+                                    image:
+                                    'assets/images/bottleCapcity.png',
                                     title: "bottles",
                                   ),
                                 ],
@@ -321,38 +339,34 @@ class DashboardScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-
                         Column(
                           children: [
-
-                           itemSquare(
-                               heading: "12.983.21",
-                               title: "profit",
-                               profit: "+30%",
-                               image: "assets/images/img.png",
-                               factorWidth: factorWidth,
-                               factorHeight: factorHeight),
-                            // Profit
-                            SizedBox(height: 5),
                             itemSquare(
-                                heading: "12.983.21",
+                                heading:last7days? "${data["profit"].toStringAsFixed(2)}":"${totalData["profit"].toStringAsFixed(2)}",
                                 title: "profit",
-                                profit: "+30%",
-                                image: "assets/images/img.png",
+                                profit: last7days?"${percentage["profit"].toStringAsFixed(2)}%":"~",
+                                image: "assets/images/profit.png",
                                 factorWidth: factorWidth,
                                 factorHeight: factorHeight),
                             // Profit
+                            SizedBox(height: 5),
+                            itemSquare(
+                                heading:last7days? "${data["transactions"].toStringAsFixed(2)}":"${totalData["transactionCount"].toStringAsFixed(2)}",
+                                title: "total transaction",
+                                profit: last7days?"${percentage["transactions"].toStringAsFixed(2)}%":"~",
 
+                                image: "assets/images/transctions.png",
+                                factorWidth: factorWidth,
+                                factorHeight: factorHeight),
+                            // Profit
                           ],
                         ),
-
-
                       ],
                     ),
                     SizedBox(height: 20),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 5),
                       width: 390 * factorWidth,
                       height: 180 * factorHeight,
                       decoration: BoxDecoration(
@@ -364,7 +378,6 @@ class DashboardScreen extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.35),
                             spreadRadius: 3,
                             blurRadius: 3,
-
                           ),
                         ],
                       ),
@@ -377,43 +390,56 @@ class DashboardScreen extends StatelessWidget {
                             height: 125 * factorHeight,
                             width: 125 * factorWidth,
                             child: PieChart(
+
                               PieChartData(
+
                                 sections: [
                                   PieChartSectionData(
                                     color: HexColor("625A94"),
-                                    value: 40,
-                                    title: '',
+                                    value: topMerchant[0]["noOfRedeems"]*1.0,
+                                    //title: topMerchant[0]["name"],
                                     radius: 25,
+                                    showTitle: false,
                                   ),
                                   PieChartSectionData(
                                     color: HexColor("#FFDE59"),
-                                    value: 30,
-                                    title: '',
+                                    value: topMerchant[1]["noOfRedeems"]*1.0,
+
+                                    showTitle: false,
+                                    //title: topMerchant[1]["name"],
                                     radius: 25,
                                   ),
                                   PieChartSectionData(
                                     color: HexColor("#A4EB77"),
-                                    value: 20,
-                                    title: '',
+                                    value: topMerchant[2]["noOfRedeems"]*1.0,
+                                    // title: topMerchant[2]["name"],
                                     radius: 25,
+                                    showTitle: false,
+
                                   ),
                                   PieChartSectionData(
                                     color: HexColor("#FFBB8F"),
-                                    value: 10,
-                                    title: '',
+                                    value: topMerchant[3]["noOfRedeems"]*1.0,
+                                    // title: topMerchant[3]["name"],
                                     radius: 25,
+                                    showTitle: false,
+
                                   ),
                                 ],
+
                                 borderData: FlBorderData(
-                                  show: true,
+                                  show: false,
                                 ),
                                 sectionsSpace: 0,
                                 centerSpaceRadius: 40,
                               ),
+
                             ),
                           ),
+
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Top merchants",
@@ -426,65 +452,72 @@ class DashboardScreen extends StatelessWidget {
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "Spinneys", color: HexColor("625A94")),
+                                  text: topMerchant[0]["name"],
+                                  color: HexColor("625A94")),
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "Spinneys", color: HexColor("#FFDE59")),
+                                  text:  topMerchant[1]["name"],
+                                  color: HexColor("#FFDE59")),
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "McDonalds",
+                                  text:  topMerchant[2]["name"],
                                   color: HexColor("#A4EB77")),
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "Burger King",
+                                  text:  topMerchant[3]["name"],
                                   color: HexColor("#FFBB8F")),
                             ],
-                          )//////
+                          ) //////
                         ],
                       ),
-                    ),// chart1
-                    SizedBox(height: 20,),
+                    ), // chart1
+                    SizedBox(
+                      height: 20,
+                    ),
                     Wrap(
-                      spacing: 13.0, // space between items in the same row
+                      spacing:
+                      13.0, // space between items in the same row
                       runSpacing: 16.0,
                       children: [
                         itemSquare(
-                            heading: "12.983.21",
-                            title: "profit",
-                            profit: "+30%",
-                            image: "assets/images/img.png",
+                            heading: last7days?"${data["users"]}":"${totalData["totalUsers"]}",
+                            title: "total users",
+                            profit:last7days? "${percentage["users"].toStringAsFixed(2)}%":"~",
+                            image: "assets/images/users.png",
                             factorWidth: factorWidth,
                             factorHeight: factorHeight),
                         itemSquare(
-                            heading: "12.983.21",
-                            title: "profit",
-                            profit: "+30%",
-                            image: "assets/images/img.png",
-                            factorWidth: factorWidth,
-                            factorHeight: factorHeight),
-                        itemSquare(
-                            heading: "12.983.21",
-                            title: "profit",
-                            profit: "+30%",
-                            image: "assets/images/img.png",
-                            factorWidth: factorWidth,
-                            factorHeight: factorHeight),
-                        itemSquare(
-                            heading: "12.983.21",
-                            title: "profit",
-                            profit: "+30%",
-                            image: "assets/images/img.png",
-                            factorWidth: factorWidth,
-                            factorHeight: factorHeight),
+                            heading: last7days?"${data["cans"]}":"${totalData["totalCans"]}",
 
+                            title: "total cans ",
+                            profit: last7days?"${percentage["cans"].toStringAsFixed(2)}%":"~",
+                            image: "assets/images/coins.png",
+                            factorWidth: factorWidth,
+                            factorHeight: factorHeight),
+                        itemSquare(
+                            heading: last7days?"${data["coins"].toStringAsFixed(2)}":"${totalData["totalCoins"].toStringAsFixed(2)}",
+                            title: "total coins",
+                            profit: last7days?"${percentage["coins"].toStringAsFixed(2)}%":"~",
+                            image: "assets/images/coins.png",
+                            factorWidth: factorWidth,
+                            factorHeight: factorHeight),
+                        itemSquare(
+                            heading: last7days?"${data["bottles"].toStringAsFixed(2)}":"${totalData["totalBottles"].toStringAsFixed(2)}",
+                            title: "total bottles",
+                            profit: last7days?"${percentage["bottles"].toStringAsFixed(2)}%":"~",
+                            image: "assets/images/bottles.png",
+                            factorWidth: factorWidth,
+                            factorHeight: factorHeight),
                       ],
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
-                      height: 270*factorHeight,
+                      height: 270 * factorHeight,
                       width: 390 * factorWidth,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -495,17 +528,18 @@ class DashboardScreen extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.35),
                             spreadRadius: 3,
                             blurRadius: 3,
-
                           ),
                         ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          SizedBox(height: 15,),
+                          SizedBox(
+                            height: 15,
+                          ),
                           Row(
-mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceAround,
                             children: [
                               Text(
                                 "Bottles and cans Overview",
@@ -520,42 +554,39 @@ mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   factorWidth: factorWidth,
                                   text: "Cans",
                                   color: HexColor("#62B145")),
-
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
                                   text: "Bottles",
                                   color: HexColor("#ABD67D")),
                             ],
-
                           ),
                           SizedBox(
                             height: 30,
                           ),
-
-
                           Expanded(
-
                             child: Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 10
-                              ),
+                              margin:
+                              EdgeInsets.symmetric(horizontal: 10),
                               child: BarChart(
                                 BarChartData(
                                   maxY: 20,
-
                                   titlesData: FlTitlesData(
                                     show: true,
-                                    rightTitles:  AxisTitles(
-                                      sideTitles: SideTitles(showTitles: false),
+                                    rightTitles: AxisTitles(
+                                      sideTitles:
+                                      SideTitles(showTitles: false),
                                     ),
-                                    topTitles:  AxisTitles(
-                                      sideTitles: SideTitles(showTitles: false),
+                                    topTitles: AxisTitles(
+                                      sideTitles:
+                                      SideTitles(showTitles: false),
                                     ),
                                     bottomTitles: AxisTitles(
                                       sideTitles: SideTitles(
                                         showTitles: true,
-                                        getTitlesWidget: DashboardCubit.get(context).bottomTitles,
+                                        getTitlesWidget:
+                                        DashboardCubit.get(context)
+                                            .bottomTitles,
                                         reservedSize: 42,
                                       ),
                                     ),
@@ -564,26 +595,29 @@ mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         showTitles: true,
                                         reservedSize: 28,
                                         interval: 1,
-                                        getTitlesWidget: DashboardCubit.get(context).leftTitles,
+                                        getTitlesWidget:
+                                        DashboardCubit.get(context)
+                                            .leftTitles,
                                       ),
                                     ),
                                   ),
                                   borderData: FlBorderData(
                                     show: false,
                                   ),
-                                  barGroups: showingBarGroups,
-                                  gridData:  FlGridData(show: false),
+                                  barGroups: showingBarGroupsBC,
+                                  gridData: FlGridData(show: false),
                                 ),
                               ),
                             ),
                           ),
-
                         ],
                       ),
-                    ),// bottle and cans charts
-                    SizedBox(height: 20,),
+                    ), // bottle and cans charts
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
-                      height: 270*factorHeight,
+                      height: 270 * factorHeight,
                       width: 390 * factorWidth,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -594,18 +628,21 @@ mainAxisAlignment: MainAxisAlignment.spaceAround,
                             color: Colors.grey.withOpacity(0.35),
                             spreadRadius: 3,
                             blurRadius: 3,
-
                           ),
                         ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
+                          SizedBox(
+                            height: 15,
+                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                "Bottles and cans Overview",
+                                "Transactions Overview",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black,
@@ -615,44 +652,41 @@ mainAxisAlignment: MainAxisAlignment.spaceAround,
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "Cans",
+                                  text: "Gift",
                                   color: HexColor("#62B145")),
-
                               indicatorCircle(
                                   factorHeight: factorHeight,
                                   factorWidth: factorWidth,
-                                  text: "Bottles",
+                                  text: "Voucher",
                                   color: HexColor("#ABD67D")),
                             ],
-
                           ),
                           SizedBox(
                             height: 30,
                           ),
-
-
                           Expanded(
-
                             child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10
-                              ),
+                              margin:
+                              EdgeInsets.symmetric(horizontal: 10),
                               child: BarChart(
                                 BarChartData(
                                   maxY: 20,
-
                                   titlesData: FlTitlesData(
                                     show: true,
-                                    rightTitles:  AxisTitles(
-                                      sideTitles: SideTitles(showTitles: false),
+                                    rightTitles: AxisTitles(
+                                      sideTitles:
+                                      SideTitles(showTitles: false),
                                     ),
-                                    topTitles:  AxisTitles(
-                                      sideTitles: SideTitles(showTitles: false),
+                                    topTitles: AxisTitles(
+                                      sideTitles:
+                                      SideTitles(showTitles: false),
                                     ),
                                     bottomTitles: AxisTitles(
                                       sideTitles: SideTitles(
                                         showTitles: true,
-                                        getTitlesWidget: DashboardCubit.get(context).bottomTitles,
+                                        getTitlesWidget:
+                                        DashboardCubit.get(context)
+                                            .bottomTitles,
                                         reservedSize: 42,
                                       ),
                                     ),
@@ -661,27 +695,29 @@ mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         showTitles: true,
                                         reservedSize: 28,
                                         interval: 1,
-                                        getTitlesWidget: DashboardCubit.get(context).leftTitles,
+                                        getTitlesWidget:
+                                        DashboardCubit.get(context)
+                                            .leftTitles,
                                       ),
                                     ),
                                   ),
                                   borderData: FlBorderData(
                                     show: false,
                                   ),
-                                  barGroups: showingBarGroups,
-                                  gridData:  FlGridData(show: false),
+                                  barGroups: showingBarGroupsGV,
+                                  gridData: FlGridData(show: false),
                                 ),
                               ),
                             ),
                           ),
-
                         ],
                       ),
-                    ),// bottle and cans charts
+                    ),  // bottle and cans charts
                   ],
                 ),
               ),
-            ),
+            )
+                : Center(child: CircularProgressIndicator()),
           );
         },
       ),

@@ -5,7 +5,7 @@ class History {
 
   History.fromJson(Map<String, dynamic> json) {
     status = json['status']??'';
-    results = json['results']??'';
+    results = json['results']??0;
     if (json['data'] != null && json['data']['transactions'] != null) {
       // Parse list of UserData objects
       transaction = List<Transaction>.from(json['data']['transactions'].map((x) => Transaction.fromJson(x)));

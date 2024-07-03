@@ -66,7 +66,6 @@ class ApiResponse {
   ApiResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null && json['data']['data'] != null) {
-      // Access the first element of the data list
       data = [UserData.fromJson(json['data']['data'][0])];
     } else {
       data = [];
@@ -74,18 +73,17 @@ class ApiResponse {
   }
 }
 
-
 class UserData {
   late Wallet wallet;
   late List<String> name;
-  late String? userPhoto;
+  String? userPhoto;
   late String role;
   late String passwordChangedAt;
   late int machineVisits;
   late String id;
   late String email;
   late String phoneNumber;
-  late int verificationCode;
+  late int? verificationCode; // Nullable to handle potential null values
 
   UserData.fromJson(Map<String, dynamic> json) {
     wallet = Wallet.fromJson(json['wallet']);
@@ -97,10 +95,9 @@ class UserData {
     id = json['_id'];
     email = json['email'];
     phoneNumber = json['phoneNumber'];
-    verificationCode = json['verificationCode'];
+    verificationCode = json['verificationCode'] ?? 0; // Provide a default value if null
   }
 }
-
 
 class Wallet {
   late double coins;
@@ -110,13 +107,13 @@ class Wallet {
   late String updatedAt;
 
   Wallet.fromJson(Map<String, dynamic> json) {
-    coins = (json['Coins'] is int) ? (json['Coins'] as int).toDouble() : json['Coins'];
-    money = (json['Money'] is int) ? (json['Money'] as int).toDouble() : json['Money'];
-    money = double.parse(money.toStringAsFixed(2));
-    canCount = json['canCount'];
-    bottleCount = json['bottleCount'];
+    coins = (json['Coins'] is int) ? (json['Coins'] as int).toDouble() : (json['Coins'] ?? 0.0);
+    money = (json['Money'] is int) ? (json['Money'] as int).toDouble() : (json['Money'] ?? 0.0);
+    money=double.parse(money.toStringAsFixed(2));
+    canCount = json['canCount'] ?? 0; // Provide a default value if null
+    bottleCount = json['bottleCount'] ?? 0; // Provide a default value if null
     updatedAt = json['updatedAt'];
   }
-
 }
+
 

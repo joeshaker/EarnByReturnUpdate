@@ -2,10 +2,15 @@
 class Assets {
   Assets._();
 
+  static const String assetsImagesCoins = 'assets/images/coins.png';
   static const String fontsPoppins = 'assets/fonts/poppins.ttf';
   static const String imagesBigmac = 'assets/images/bigmac.png';
+  static const String imagesBottleCapcity = 'assets/images/bottleCapcity.png';
+  static const String imagesBottles = 'assets/images/bottles.png';
   static const String imagesBurger = 'assets/images/burger.jpg';
   static const String imagesCalories = 'assets/images/calories.jpg';
+  static const String imagesCans = 'assets/images/cans.png';
+  static const String imagesCansCapcity = 'assets/images/cansCapcity.png';
   static const String imagesCheckEmail = 'assets/images/check_email.jpg';
   static const String imagesCoins = 'assets/images/coins.jpg';
   static const String imagesFacebook = 'assets/images/facebook.jpg';
@@ -33,10 +38,13 @@ class Assets {
   static const String imagesPerson = 'assets/images/Person.png';
   static const String imagesPick1 = 'assets/images/pick1.jpg';
   static const String imagesPick2 = 'assets/images/pick2.jpg';
+  static const String imagesProfit = 'assets/images/profit.png';
   static const String imagesResetPassword = 'assets/images/resetPassword.jpg';
   static const String imagesShare = 'assets/images/share.png';
   static const String imagesSpines = 'assets/images/spines.png';
   static const String imagesStopwatch = 'assets/images/stopwatch.jpg';
+  static const String imagesTransctions = 'assets/images/transctions.png';
   static const String imagesTrue = 'assets/images/true.jpg';
+  static const String imagesUsers = 'assets/images/users.png';
 
 }

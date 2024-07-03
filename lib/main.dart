@@ -48,7 +48,7 @@ void main() async{
   if(onBoarding !=null){
     // 3shan ashof ana 3mlt login aw shoft al onboarding abl keda wla la
     if(token !=null ) { // انا عديت من ال لوج ان مره خلاص
-      widget = EarnByReturnLayout();
+      widget = Bottonav();
     }else{
       widget = LoginScreen();
     }
@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               debugShowCheckedModeBanner: false,
-              home:Bottonav()
+              home:DashboardScreen()
 
             // home: CheckEmailScreen(email: "Sohila123@gmail.com",),
             // home: CheckEmailScreen(email: 'sohila@gmail.com',comeFrom:'RegisterScreen' ),

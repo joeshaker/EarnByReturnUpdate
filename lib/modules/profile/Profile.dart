@@ -1,7 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:earn_by_return/modules/Redeem/Redeem.dart';
 import 'package:earn_by_return/modules/login/cubit/cubit.dart';
+import 'package:earn_by_return/modules/login/login_screen.dart';
 import 'package:earn_by_return/modules/voucher/voucher.dart';
+import 'package:earn_by_return/shared/network/local/cache_helper.dart';
+import 'package:earn_by_return/shared/styles/colorsEarn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model/UserModel.dart';
@@ -30,7 +33,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
     MyWallet(),
     MyWallet(),
     MyWallet(),
-    MyWallet(),
+    LoginScreen(),
   ];
 
   List<ProfileModel> Profile = [
@@ -82,7 +85,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
     ProfileModel(
       text1: 'Logout',
       icon: Icons.logout_outlined,
-      shouldNavigate: false,
+      shouldNavigate: true,
     ),
   ];
 
@@ -133,7 +136,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.green[500],
+                                  color: defaultColor,
                                 ),
                               ),
                             ],
@@ -154,6 +157,9 @@ class _ProflieScreenState extends State<ProflieScreen> {
                           child: InkWell(
                             onTap: () {
                               if (Profile[index].shouldNavigate??true) {
+                                if(Profile[index].text1=="Logout"){
+                                  CacheHelper.clearData(key: 'token');
+                                }
                                 navigateTo(context, Screens[index]);
                               }
                             },
@@ -182,16 +188,16 @@ class _ProflieScreenState extends State<ProflieScreen> {
         children: [
           Icon(
             model.icon,
-            size: 40,
-            color: Colors.green,
+            size: 30,
+            color: model.text1=='Logout'?Colors.red:defaultColor,
           ),
           SizedBox(width: 30),
           Text(
             "${model.text1}",
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               fontWeight: FontWeight.w400,
-              color: Colors.black,
+              color: model.text1=='Logout'?Colors.red:Colors.black,
             ),
           ),
         ],
