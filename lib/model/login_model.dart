@@ -7,7 +7,7 @@ class LoginModel {
   LoginModel.fromJson(Map<String, dynamic> json) //named constructor
   {
     status = json['status'] != null ?json['status']:''; //اللي جاي من ال response
-   message = json['message'] != null ?json['message']:'';
+   message = json['message'] != null ?json['message']:'Login successful';
     token = json['token'] != null ?json['token']:'' ;
 
     //عشان بعدد كده اقدر استخرج منه بقي

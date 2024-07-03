@@ -41,10 +41,17 @@ class LoginScreen extends StatelessWidget {
                       key: 'token', value: state.loginModel.token)
                   .then((value) {
                     if(state.loginModel.data!.role=="admin"){
-                      navigateAndFinish(context, BottomNavAdmin());
+                     selectedRole=state.loginModel.data!.role;
+                     Role=state.loginModel.data!.role;
+
                       CacheHelper.saveData(key: 'role', value: state.loginModel.data!.role);
-                      print(Role);
+                      navigateAndFinish(context, BottomNavAdmin());
+
                     }else{
+                      selectedRole=state.loginModel.data!.role;
+                      Role=state.loginModel.data!.role;
+                      CacheHelper.saveData(key: 'role', value: state.loginModel.data!.role);
+
                       navigateAndFinish(context,  Bottonav());
                     }
 

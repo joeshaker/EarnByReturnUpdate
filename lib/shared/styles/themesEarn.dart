@@ -57,9 +57,21 @@ ThemeData darkTheme = ThemeData(
 
 
 ThemeData lightTheme =  ThemeData(
+
   scaffoldBackgroundColor: Colors.white,
 
- //primarySwatch:defaultColor, //change all colors in the app
+ primarySwatch:MaterialColor(0xFF97CE5E, {
+   50: Color(0xFFF0F7E2),
+   100: Color(0xFFD9EBC1),
+   200: Color(0xFFC1DF9F),
+   300: Color(0xFFA9D37D),
+   400: Color(0xFF93C85D),
+   500: Color(0xFF7DBD3D), // primary color
+   600: Color(0xFF72B434),
+   700: Color(0xFF68A92B),
+   800: Color(0xFF5E9F23),
+   900: Color(0xFF4D8E15),
+ }), //change all colors in the app
   appBarTheme: AppBarTheme(
     titleSpacing: 20,
    // shape: BorderDirectional(bottom:BorderSide(width: 1,color: Colors.black12)),
@@ -80,6 +92,7 @@ ThemeData lightTheme =  ThemeData(
     actionsIconTheme: IconThemeData(
         color: Colors.black
     ),
+
 
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(

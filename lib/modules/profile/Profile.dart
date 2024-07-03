@@ -182,21 +182,31 @@ class _ProflieScreenState extends State<ProflieScreen> {
                           child: InkWell(
                             onTap: () {
                               if (Profile[index].shouldNavigate??true) {
-
                                 if(Profile[index].text1=="Logout"){
                                   CacheHelper.clearData(key: 'token');
-                                }
-                                if(index==Profile.length-2){
-                                  if(selectedRole!="admin"){
-                                    selectedRole="admin";
-                                    navigateTo(context, BottomNavAdmin());
-                                  }else{
-                                    selectedRole="user";
-                                    navigateTo(context, Bottonav());
+                                  CacheHelper.clearData(key: 'role');
 
+
+
+                                }
+
+                                if(index==Profile.length-2){
+                                  if(Role=="admin"){
+                                    print(Role);
+                                    if(selectedRole!="admin"){
+                                      selectedRole="admin";
+                                      navigateTo(context, BottomNavAdmin());
+                                    }
+                                    else{
+                                      selectedRole="user";
+                                      navigateTo(context, Bottonav());
+
+                                    }
                                   }
 
-                                }else{
+
+                                }
+                                else{
                                   navigateTo(context, Screens[index]);
                                 }
 

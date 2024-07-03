@@ -47,8 +47,8 @@ class RegisterCubit extends Cubit<Registerstates> {
       emit(RegisterErrorstate(error.toString(),error.response.data["message"]));
     });
   }
-  bool passwordVisable = false;
-  bool ConfirmpasswordVisable = false;
+  bool passwordVisable = true;
+  bool ConfirmpasswordVisable = true;
   IconData Passwordsuffix = CupertinoIcons.eye_fill;
   IconData ConfirmPasswordsuffix = CupertinoIcons.eye_fill;
 
@@ -57,13 +57,13 @@ class RegisterCubit extends Cubit<Registerstates> {
   {
     if(password){
       passwordVisable =!passwordVisable;
-      Passwordsuffix = passwordVisable? CupertinoIcons.eye_slash_fill:CupertinoIcons.eye_fill;
+      Passwordsuffix = passwordVisable? CupertinoIcons.eye_fill:CupertinoIcons.eye_slash_fill;
       emit(RegisterChangePasswordVisabilitystate());
 
     }else
       {
         ConfirmpasswordVisable =!ConfirmpasswordVisable;
-        ConfirmPasswordsuffix = ConfirmpasswordVisable? CupertinoIcons.eye_slash_fill:CupertinoIcons.eye_fill;
+        ConfirmPasswordsuffix = ConfirmpasswordVisable? CupertinoIcons.eye_fill:CupertinoIcons.eye_slash_fill;
         emit(RegisterChangeConfirmPasswordVisabilitystate());
 
       }

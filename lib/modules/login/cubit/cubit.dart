@@ -22,28 +22,34 @@ class LoginCubit extends Cubit<Loginstates> {
     emit(LoginLoadingstate());
     DioHelper.postData(url: LOGIN, data: {'email': email, 'password': password})
         .then((value) {
-        loginModel = LoginModel.fromJson(value.data);
-        CacheHelper.saveData(key: 'token', value: value.data['token']);
-        CacheHelper.saveData(key: 'role', value: value.data['role']);
-        print(loginModel.token);
-        // print(loginModel.data!.role);
-        // DioHelper.getData(url: 'api/v1/user/me');
-        emit(LoginSuccessstate(loginModel));
+          print("hpeen");
+          print(value);
+          if(value.statusCode==200){
+            loginModel = LoginModel.fromJson(value.data);
+            CacheHelper.saveData(key: 'token', value: value.data['token']);
+            CacheHelper.saveData(key: 'role', value: value.data['role']);
+            emit(LoginSuccessstate(loginModel));
+          }else{
+
+            emit(LoginErrorstate(value.data["message"],value.data["message"]));
+
+          }
+
+
+
     },).catchError((error) {
 
-      // if(error.response.statusCode==401){
-      //   emit(LoginErrorstate(error.toString(),));
-      // }
+
       emit(LoginErrorstate(error.toString(),error.response.data['message']));
     });
 
   }
-  bool passwordVisable = false;
+  bool passwordVisable = true;
   IconData suffix = CupertinoIcons.eye_fill;
   void changePasswordVisiability()
   {
     passwordVisable =!passwordVisable;
-    suffix = passwordVisable? CupertinoIcons.eye_slash_fill:CupertinoIcons.eye_fill;
+    suffix = passwordVisable? CupertinoIcons.eye_fill:CupertinoIcons.eye_slash_fill;
     emit(LoginChangePasswordVisabilitystate());
 
   }
