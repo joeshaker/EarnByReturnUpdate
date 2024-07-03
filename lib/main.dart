@@ -42,6 +42,7 @@ void main() async{
   bool? darkMode = CacheHelper.getData(key: 'darkMode');
   bool? onBoarding =CacheHelper.getData(key: 'onBoarding');
   token =CacheHelper.getData(key: 'token');
+  // Role=CacheHelper.getData(key: 'role');
   id=CacheHelper.getData(key: '_id');
   Widget widget=Text("data") ;
 
@@ -94,7 +95,7 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               debugShowCheckedModeBanner: false,
-              home:BottomNavAdmin()
+              home:startWidget
 
             // home: CheckEmailScreen(email: "Sohila123@gmail.com",),
             // home: CheckEmailScreen(email: 'sohila@gmail.com',comeFrom:'RegisterScreen' ),

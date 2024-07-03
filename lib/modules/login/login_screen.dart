@@ -3,6 +3,7 @@ import 'package:earn_by_return/layout/earn_by_return_layout/app_layout.dart';
 import 'package:earn_by_return/modules/Redeem/Redeem.dart';
 import 'package:earn_by_return/modules/bottomnavbar/bottomnav.dart';
 import 'package:earn_by_return/modules/forget_password/forget_password_screen.dart';
+import 'package:earn_by_return/shared/component/component/constants.dart';
 import 'package:earn_by_return/shared/styles/colorsEarn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +40,8 @@ class LoginScreen extends StatelessWidget {
                       key: 'token', value: state.loginModel.token)
                   .then((value) {
                 navigateAndFinish(context,  Bottonav());
+                // CacheHelper.saveData(key: 'role', value: state.loginModel.data!.role);
+                // print(Role);
               });
             }
             else {

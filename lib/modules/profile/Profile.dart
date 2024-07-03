@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:earn_by_return/modules/BottomnavAdmin/BottomnavAdmine.dart';
 import 'package:earn_by_return/modules/Redeem/Redeem.dart';
 import 'package:earn_by_return/modules/login/cubit/cubit.dart';
 import 'package:earn_by_return/modules/login/login_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model/UserModel.dart';
 import '../../shared/component/component/components.dart';
+import '../../shared/component/component/constants.dart';
 import '../../shared/network/remote/dio_helper.dart';
 import '../history/History.dart';
 import '../mywallet_recycle/Mywallet.dart';
@@ -88,6 +90,22 @@ class _ProflieScreenState extends State<ProflieScreen> {
       shouldNavigate: true,
     ),
   ];
+  // void _updateProfileList() {
+  //   if (Role == "admin") {
+  //     Profile.insert(Profile.length - 1, // Insert before the last item
+  //       ProfileModel(
+  //         text1: 'Admin',
+  //         icon: Icons.admin_panel_settings_outlined,
+  //         shouldNavigate: true,
+  //       ),
+  //     );
+  //     Screens.insert(Screens.length - 1, BottomNavAdmin()); // Add your Admin screen here
+  //   }
+  // }
+  // void initState() {
+  //   super.initState();
+  //   _updateProfileList();
+  // }
 
   @override
   Widget build(BuildContext context) {

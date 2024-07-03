@@ -15,7 +15,7 @@ class VoucherCubit extends Cubit<VoucherState> {
   ApiResponse ?voucher;
   void getuserData(){
     emit(VoucherLoding());
-    DioHelper.getData(url:'api/v1/merchant/${merchant_id}/vouchers',token: token).then((value){
+    DioHelper.getData(url:'api/v1/merchant/${merchant_id}/vouchers?active=true',token: token).then((value){
       print(value.data);
       voucher = ApiResponse.fromJson(value.data);
       // print(merchant.toString());

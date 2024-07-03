@@ -24,7 +24,9 @@ class LoginCubit extends Cubit<Loginstates> {
         .then((value) {
         loginModel = LoginModel.fromJson(value.data);
         CacheHelper.saveData(key: 'token', value: value.data['token']);
+        // CacheHelper.saveData(key: 'role', value: value.data['role']);
         print(loginModel.token);
+        // print(loginModel.data!.role);
         // DioHelper.getData(url: 'api/v1/user/me');
         emit(LoginSuccessstate(loginModel));
     },).catchError((error) {

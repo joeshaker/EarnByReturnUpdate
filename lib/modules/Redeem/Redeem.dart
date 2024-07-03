@@ -74,8 +74,8 @@ class _RedeemscreenState extends State<Redeemscreen> {
                           CacheHelper.saveData(key: 'merchantPhoto', value: RedeemCubit.get(context).merchant!.data[index].photos);
                           merchant_id= CacheHelper.getData(key: '_id');
                           merchant_photo= CacheHelper.getData(key: 'merchantPhoto');
-                          // print(merchant_id);
-                          // print(merchant_photo);
+                          print(merchant_id);
+                          print(Role);
                           navigateTo(context,VoucherScreen());
                         },
                           child: _buildItem(context, state.Merchant.data[index])),
