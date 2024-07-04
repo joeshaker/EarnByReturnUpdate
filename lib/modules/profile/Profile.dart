@@ -36,7 +36,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
     MyWallet(),
     MyWallet(),
     BottomNavAdmin(),
-    MyWallet(),
+    LoginScreen(),
 
   ];
 
