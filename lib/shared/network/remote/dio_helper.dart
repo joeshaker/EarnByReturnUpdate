@@ -78,6 +78,7 @@ class DioHelper
     {
       // 'lang':lang,
       // 'token':token
+      'Authorization': 'Bearer ${token}'??''
     }
     ;
     return dio.patch(

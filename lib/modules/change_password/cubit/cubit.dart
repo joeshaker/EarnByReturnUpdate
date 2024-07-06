@@ -28,6 +28,8 @@ class ChangePassCubit extends Cubit<ChangePassstates> {
       print(value.statusCode);
       if(value.statusCode==200){
         emit(ChangePassSuccessstate(value.data['status']));
+      }else{
+        emit(ChangePassErrorstate(value.data["message"],value.data["message"]));
       }
 
 
@@ -36,6 +38,14 @@ class ChangePassCubit extends Cubit<ChangePassstates> {
       print(error);
       emit(ChangePassErrorstate(error.toString(),error.response.data["message"]));
     });
+  }
+
+  bool clickable = false;
+  void Changebuttonclick(bool state)
+  {
+    clickable = state;
+    emit(ChangePassButtonClickablestate());
+
   }
   bool passwordVisable = true;
   bool ConfirmpasswordVisable = true;

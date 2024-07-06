@@ -22,6 +22,7 @@ class ChangePasswordScreen extends StatelessWidget {
   bool clickable =false ;
   @override
   Widget build(BuildContext context) {
+    clickable = passwordController.text.isNotEmpty&& CurrentpasswordController.text.isNotEmpty&& ConfirmPasswordController.text.isNotEmpty;
     return BlocProvider(
       create: (context) => ChangePassCubit(),
       child: BlocConsumer<ChangePassCubit, ChangePassstates>(
@@ -29,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
           // TODO: implement listener
           if(state is ChangePassSuccessstate){
             ShowToast(text: state.message,state: ToastStates.SUCCESS );
-            navigateTo(context, ChangePasswordDoneScreen());
+            navigateAndFinish(context, ChangePasswordDoneScreen());
           }
           if(state is ChangePassErrorstate){
             ShowToast(text: state.error_message, state: ToastStates.ERROR);
@@ -99,7 +100,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           },
                           onChange: (value) {
                             clickable = passwordController.text.isNotEmpty && ConfirmPasswordController.text.isNotEmpty && CurrentpasswordController.text.isNotEmpty;
-                            //  RegisterCubit.get(context).Changebuttonclick(clickable);
+                              ChangePassCubit.get(context).Changebuttonclick(clickable);
 
                           },
                         ),
@@ -135,7 +136,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           },
                           onChange: (value) {
                             clickable = passwordController.text.isNotEmpty && ConfirmPasswordController.text.isNotEmpty && CurrentpasswordController.text.isNotEmpty;
-                            //  RegisterCubit.get(context).Changebuttonclick(clickable);
+                             ChangePassCubit.get(context).Changebuttonclick(clickable);
 
                           },
                         ),
@@ -171,7 +172,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           },
                           onChange: (value) {
                             clickable = passwordController.text.isNotEmpty && ConfirmPasswordController.text.isNotEmpty && CurrentpasswordController.text.isNotEmpty;
-                            // RegisterCubit.get(context).Changebuttonclick(clickable);
+                            ChangePassCubit.get(context).Changebuttonclick(clickable);
 
                           },
                         ),
@@ -187,8 +188,8 @@ class ChangePasswordScreen extends StatelessWidget {
                               background: clickable
                                   ? defaultColor
                                   : Colors.grey,
-                                // clickable: true,
-                                // background:defaultColor,
+                              //   clickable: true,
+                              //   background:defaultColor,
                                 function: () {
                                   if (fromKey.currentState!.validate()) {
                                     if (ConfirmPasswordController.text ==

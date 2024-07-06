@@ -13,6 +13,7 @@ import '../../shared/component/component/components.dart';
 import '../../shared/component/component/constants.dart';
 import '../../shared/network/remote/dio_helper.dart';
 import '../bottomnavbar/bottomnav.dart';
+import '../change_password/change_password_screen.dart';
 import '../history/History.dart';
 import '../mywallet_recycle/Mywallet.dart';
 import 'cubit/profile_cubit.dart';
@@ -32,7 +33,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
     VoucherScreen(),
     MyWallet(),
     Historyscreen(),
-    MyWallet(),
+    ChangePasswordScreen(),
     MyWallet(),
     MyWallet(),
     BottomNavAdmin(),
@@ -67,9 +68,9 @@ class _ProflieScreenState extends State<ProflieScreen> {
       shouldNavigate: true,
     ),
     ProfileModel(
-      text1: 'Rate App',
-      icon: Icons.star_border_rounded,
-      shouldNavigate: false,
+      text1: 'Change Password',
+      icon: Icons.password_outlined,
+      shouldNavigate: true,
     ),
     ProfileModel(
       text1: 'Refer a friend',

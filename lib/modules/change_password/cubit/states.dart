@@ -10,6 +10,8 @@ class  ChangePassLoadingstate extends ChangePassstates {}
 class  ChangeModifyPasswordVisabilitystate  extends ChangePassstates {}
 class  ChangeModifyConfirmPasswordVisabilitystate  extends ChangePassstates {}
 class  ChangeModifyCurrentPasswordVisabilitystate  extends ChangePassstates {}
+class  ChangePassButtonClickablestate  extends ChangePassstates {}
+
 
 class  ChangePassSuccessstate extends ChangePassstates {
   final String message;
