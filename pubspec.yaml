@@ -67,8 +67,12 @@ dependencies:
   loading_animation_widget: ^1.2.1
   syncfusion_flutter_charts: ^26.1.39
   fl_chart: ^0.60.0
+  flutter_launcher_icons: ^0.13.1
 
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
 
 dev_dependencies:
   flutter_test:
