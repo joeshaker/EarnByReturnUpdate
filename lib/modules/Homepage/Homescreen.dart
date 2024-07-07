@@ -110,7 +110,7 @@ class _HomescreenState extends State<Homescreen> {
                       padding: const EdgeInsets.only(top: 40.0,right: 20),
                       child:
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/Person.png'),
+                        backgroundImage: AssetImage(ProfileCubit.get(context).users!.data[0].gender=='female'?'assets/images/Person.png':'assets/images/img_7.png'),
                       ),
                     )
 
@@ -290,7 +290,7 @@ Widget BuildItemRedeem(BuildContext context, UserData userData) {
             padding: const EdgeInsets.all(20),
             child:
             Image.network(
-              userData.photos,
+              userData.photos!=''?userData.photos:"https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png",
               fit: BoxFit.cover,
             ),
           ),

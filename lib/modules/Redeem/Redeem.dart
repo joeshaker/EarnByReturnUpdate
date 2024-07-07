@@ -120,7 +120,7 @@ class _RedeemscreenState extends State<Redeemscreen> {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Image.network(
-                userData.photos,
+                userData.photos!=''?userData.photos:"https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png",
                 fit: BoxFit.cover,
               ),
             ),

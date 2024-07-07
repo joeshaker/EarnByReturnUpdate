@@ -141,7 +141,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
                         children: [
                           SizedBox(width: 20,),
                           CircleAvatar(
-                            backgroundImage: AssetImage('assets/images/Person.png'),
+                            backgroundImage: AssetImage(ProfileCubit.get(context).users!.data[0].gender=='female'?'assets/images/Person.png':'assets/images/img_7.png'),
                             radius: 40,
                           ),
                           SizedBox(width: 30),

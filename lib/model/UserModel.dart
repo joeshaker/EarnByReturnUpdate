@@ -83,12 +83,14 @@ class UserData {
   late String id;
   late String email;
   late String phoneNumber;
-  late int? verificationCode; // Nullable to handle potential null values
+  late int? verificationCode;
+  late String ?gender;// Nullable to handle potential null values
 
   UserData.fromJson(Map<String, dynamic> json) {
     wallet = Wallet.fromJson(json['wallet']);
     name = List<String>.from(json['name'].map((x) => x.toString()));
     userPhoto = json['userPhoto'];
+    gender = json['gender'];
     role = json['role'];
     passwordChangedAt = json['passwordChangedAt'];
     machineVisits = json['machineVisits'];

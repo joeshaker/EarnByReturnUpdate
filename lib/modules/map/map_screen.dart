@@ -108,7 +108,7 @@ class MapScreen extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 450.0),
+                  padding: const EdgeInsets.only(top: 380.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -377,7 +377,7 @@ class MapScreen extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 16.0,
+              bottom: 5.0,
               right: 16.0,
               child: FloatingActionButton(
                 backgroundColor: Colors.white,

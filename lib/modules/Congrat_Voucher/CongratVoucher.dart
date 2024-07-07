@@ -102,7 +102,7 @@ class _CongVoucherState extends State<CongVoucher> {
               ),
 
             ),
-            fallback:(context)=> Center(child: CircularProgressIndicator()),
+            fallback:(context)=> Scaffold(body: Center(child: CircularProgressIndicator())),
           );
         },
       ),

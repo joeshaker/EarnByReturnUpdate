@@ -105,7 +105,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Image.network(
-                          '${merchant_photo}',
+                          '${merchant_photo}'!=''?'${merchant_photo}':"https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png",
                             width: 150,
                             fit: BoxFit.cover,
                           ),
@@ -185,7 +185,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
           ),
         ),
       ),
-      fallback:(context)=>Center(child:CircularProgressIndicator(),) ,
+      fallback:(context)=>Scaffold(body: Center(child:CircularProgressIndicator(),)) ,
     );
   },
 );

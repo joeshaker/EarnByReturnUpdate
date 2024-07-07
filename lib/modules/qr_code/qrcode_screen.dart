@@ -1,3 +1,4 @@
+import 'package:earn_by_return/modules/bottomnavbar/bottomnav.dart';
 import 'package:earn_by_return/modules/qr_code/gain_reward_screen.dart';
 import 'package:earn_by_return/shared/component/component/components.dart';
 import 'package:earn_by_return/shared/styles/colorsEarn.dart';
@@ -46,12 +47,19 @@ class QRScanCubit extends Cubit<QRScanState> {
           coins = value.data['coins'];
           money = value.data['money'];
          controller.stopCamera();
-          emit(QRScanState.success);
+         if(value.statusCode==200){
+           emit(QRScanState.success);
+
+         }else{
+           emit(QRScanState.failure);
+
+         }
         },
       ).catchError((error) {
         // if(error.response.statusCode==401){
         //   emit(LoginErrorstate(error.toString(),));
         // }
+        controller.stopCamera();
 
         emit(QRScanState.failure);
         ShowToast(
@@ -82,11 +90,17 @@ class QRViewExample extends StatelessWidget {
               child: BlocConsumer<QRScanCubit, QRScanState>(
                 listener: (context, state) {
                   if (state == QRScanState.success) {
-                    navigateTo(context,
+
+                    navigateAndFinish(context,
                         GainRewardScren(
-                          coins: context.read<QRScanCubit>().coins,
-                          money: context.read<QRScanCubit>().money,
+                          coins: context.read<QRScanCubit>().coins??0.0,
+                          money: context.read<QRScanCubit>().money??0.0,
                         ));
+                  }
+                  if (state == QRScanState.failure) {
+
+                    navigateAndFinish(context,
+                        Bottonav());
                   }
                 },
                 builder: (context, state) {

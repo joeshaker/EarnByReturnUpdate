@@ -53,7 +53,7 @@ class DioHelper
     dio.options.headers=
     {
       // 'lang':lang,
-      // 'token':token
+      'Authorization': 'Bearer ${token}'??'',
     }
     ;
     return dio.post(

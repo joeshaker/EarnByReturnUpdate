@@ -36,7 +36,7 @@ class VoucherData {
     voucherMoney = json['voucherMoney'] ?? 0;
     validDays = json['validDays'] ?? 0;
     voucherName = json['voucherName'] ?? '';
-    voucherPhoto = json['voucherPhoto'] ?? '';
+    voucherPhoto = json['voucherPhoto']==null ? '': json['voucherPhoto']==""?'https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png':json['voucherPhoto'];
     expiryDate = json['expiryDate'] ?? '';
     createdAt = json['createdAt'] ?? '';
     remainingDays = json['remainingDays']?.toDouble() ?? 0.0;

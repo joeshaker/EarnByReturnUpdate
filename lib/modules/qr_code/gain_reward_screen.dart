@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:earn_by_return/modules/bottomnavbar/bottomnav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class GainRewardScren extends StatelessWidget {
         IconButton(
           icon: closeIcon,
           onPressed: () {
-            navigateTo(context, EarnByReturnLayout());
+            navigateTo(context, Bottonav());
           },
         ),
       ]),
@@ -68,7 +69,7 @@ class GainRewardScren extends StatelessWidget {
                               fit: BoxFit.cover,
                               height: 40,
                               width: 40,
-                              image: AssetImage('assets/images/dollar.jpg')),
+                              image: AssetImage('assets/images/coins.png')),
                         ),
                         SizedBox(
                           width: 10,
@@ -111,7 +112,7 @@ width:2,
                               fit: BoxFit.cover,
                               height: 40,
                               width: 40,
-                              image: AssetImage('assets/images/money.jpg')),
+                              image: AssetImage('assets/images/money.png')),
                         ),
                         SizedBox(
                           width: 10,
