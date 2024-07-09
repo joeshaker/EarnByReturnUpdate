@@ -30,7 +30,7 @@ class _HomescreenState extends State<Homescreen> {
     Details(text1: 'Coins',  img: 'assets/images/img.png'),
     Details(text1: 'Money',  img: 'assets/images/money.png'),
     Details(text1: 'Machine Visits',  img: 'assets/images/img_4.png'),
-    Details(text1: 'Recycled Cans',  img: 'assets/images/img_2.png'),
+    Details(text1: 'Recycled Cans',  img: 'assets/images/cans.png'),
     Details(text1: 'Recycled Bottles', img: 'assets/images/img_3.png'),
   ];
   List<mapItems>item=[

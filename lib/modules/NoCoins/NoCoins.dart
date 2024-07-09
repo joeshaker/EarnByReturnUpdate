@@ -1,3 +1,4 @@
+import 'package:earn_by_return/modules/bottomnavbar/bottomnav.dart';
 import 'package:earn_by_return/modules/map/map_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _NoCoinsScreenState extends State<NoCoinsScreen> {
             padding: const EdgeInsets.only(top: 80.0,right: 260),
             child: InkWell(
               onTap: (){
-                Navigator.pop(context);
+                navigateTo(context, Bottonav());
               },
               child:
               Icon(Icons.clear, color: Colors.black,size: 30,),

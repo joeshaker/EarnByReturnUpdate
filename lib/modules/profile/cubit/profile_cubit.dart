@@ -26,6 +26,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       // print(users.data[1]);
       print(users!.data);
       print(users!.data[0].name);
+      // print(users!.data[0].gender);
       print(users!.data[0].wallet.money);
       emit(ProfileSuccess(users!));
       detailss.add(users!.data[0].wallet.coins);

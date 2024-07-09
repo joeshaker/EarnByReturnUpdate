@@ -22,6 +22,7 @@ class GiftData {
     noOfBottles = json['noOfBottles'] ?? 0;
     giftCoins = json['giftCoins']?.toDouble() ?? 0.0;
     giftMoney = json['giftMoney']?.toDouble() ?? 0.0;
+    giftMoney=double.parse(giftMoney.toStringAsFixed(2));
     createdAt = DateTime.parse(json['createdAt'] ?? '');
     id = json['_id'] ?? '';
     version = json['__v'].toString() ?? '0';

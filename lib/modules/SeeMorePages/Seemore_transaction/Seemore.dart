@@ -108,7 +108,7 @@ class SeemoreScreen extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image(image: AssetImage('assets/images/img_2.png'),height: 80,),
+                                    Image(image: AssetImage('assets/images/cans.png'),height: 80,),
                                     SizedBox(height: 3,),
                                     Text('Recycled cans',
                                       style: TextStyle(

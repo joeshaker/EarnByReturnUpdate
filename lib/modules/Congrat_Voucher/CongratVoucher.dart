@@ -1,5 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:earn_by_return/modules/Congrat_Voucher/congrat_voucher_cubit.dart';
+import 'package:earn_by_return/modules/Homepage/Homescreen.dart';
+import 'package:earn_by_return/modules/bottomnavbar/bottomnav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,15 +35,18 @@ class _CongVoucherState extends State<CongVoucher> {
           return ConditionalBuilder(
             condition: CongratVoucherCubit.get(context).Detail!=null,
             builder:(context)=>Scaffold(
-              appBar:
-              AppBar(
-                leading: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Icon(Icons.clear, color: Colors.black,),
-                ),
-              ),
               body: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 80.0,right: 260),
+                    child: InkWell(
+                      onTap: (){
+                        navigateTo(context, Bottonav());
+                      },
+                      child:
+                      Icon(Icons.clear, color: Colors.black,size: 30,),
+                    ),
+                  ),
                   Stack(
                       children: [
                         Center(
