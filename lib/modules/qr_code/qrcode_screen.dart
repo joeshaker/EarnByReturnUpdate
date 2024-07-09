@@ -10,6 +10,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../shared/component/component/constants.dart';
 import '../../shared/network/end_points.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/network/remote/dio_helper.dart';
 
 enum QRScanState { initial, scanning, success, failure, loading, }
@@ -19,8 +20,8 @@ class QRScanCubit extends Cubit<QRScanState> {
   Barcode? result;
 
   String? message;
-  double? coins;
-  double? money;
+  dynamic? coins;
+  dynamic? money;
 
   QRScanCubit() : super(QRScanState.initial);
 
@@ -28,42 +29,46 @@ class QRScanCubit extends Cubit<QRScanState> {
     this.controller = controller;
     emit(QRScanState.scanning);
     controller.scannedDataStream.listen((scanData) {
-
       result = scanData;
       controller.pauseCamera();
       emit(QRScanState.loading);
-      controller.stopCamera();
+      controller.pauseCamera();
       print(scanData.code.toString());
+      print("loooookkkkkk outside response");
+
+      String? token = CacheHelper.getData(key: "token");
       DioHelper.postData(
-              url: ADDGIFT,
-              data: {
-                'GiftCode': result?.code.toString(),
-              },
-              token: token)
-          .then(
-        (value) {
-
-         print(value.data);
-          coins = value.data['coins'];
-          money = value.data['money'];
-         controller.stopCamera();
-         if(value.statusCode==200){
-           emit(QRScanState.success);
-
-         }else{
-           emit(QRScanState.failure);
-
-         }
+        url: ADDGIFT,
+        data: {
+          'GiftCode': result?.code.toString(),
         },
-      ).catchError((error) {
-        // if(error.response.statusCode==401){
-        //   emit(LoginErrorstate(error.toString(),));
-        // }
-        controller.stopCamera();
+        token: token,
+      ).then((value) {
+        print(value.data);
+        print("loooookkkkkk hereeeeeeeeeeeee");
 
+        print(value.data['coins']);
+        coins = value.data['coins'];
+        money = value.data['money'];
+        print(value.statusCode);
+        emit(QRScanState.success);
+        if (value.statusCode==200) {
+          print("loooookkkkkk henaaaaaaaa");
+          print(value.statusCode);
+          emit(QRScanState.success);
+        }
+        else {
+          emit(QRScanState.failure);
+          ShowToast(text: value.data['message'], state: ToastStates.ERROR);
+
+        }
+
+      }).catchError((error) {
+        controller.dispose();
+        String errorMessage = "An error occurred";
+        print(error);
         emit(QRScanState.failure);
-        ShowToast(
-            text: error.response.data["message"], state: ToastStates.ERROR);
+        ShowToast(text: errorMessage, state: ToastStates.ERROR);
       });
     });
   }
@@ -90,7 +95,6 @@ class QRViewExample extends StatelessWidget {
               child: BlocConsumer<QRScanCubit, QRScanState>(
                 listener: (context, state) {
                   if (state == QRScanState.success) {
-
                     navigateAndFinish(context,
                         GainRewardScren(
                           coins: context.read<QRScanCubit>().coins??0.0,

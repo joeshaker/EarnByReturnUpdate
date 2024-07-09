@@ -76,12 +76,18 @@ class GainRewardScren extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Text(
-                              '$coins',
-                              style: TextStyle(
-                                  color: defaultColor,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold),
+                            Container(
+                              height: 60,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  '${coins.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                      color: defaultColor,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
                             Text(
                               'coins',
@@ -117,21 +123,30 @@ width:2,
                         SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          children: [
-                            Text(
-                              '$money',
-                              style: TextStyle(
-                                  color: defaultColor,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Pounds',
-                              style:
-                              TextStyle(color: Colors.black, fontSize: 16),
-                            )
-                          ],
+                        Container(
+                          height: 70,
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: FittedBox(
+                                  child: Container(
+                                    child: Text(
+                                      '${money.toStringAsFixed(2)}',
+                                      style: TextStyle(
+                                          color: defaultColor,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'Pounds',
+                                style:
+                                TextStyle(color: Colors.black, fontSize: 16),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

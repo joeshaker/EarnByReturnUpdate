@@ -209,7 +209,7 @@ Widget BuildItem(int index) {
   builder: (context, state) {
     return Container(
     width: 150,
-    height: 500,
+
     margin: EdgeInsets.all(10), // Adjust margins as needed
     decoration: BoxDecoration(
       border: Border.all(
@@ -221,19 +221,22 @@ Widget BuildItem(int index) {
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: 170,
-            height: 155,
+            height: 100,
             decoration: BoxDecoration(
+
               borderRadius: BorderRadius.circular(20),
             ),
             child:
               // Image.asset('assets/images/bigmac.png')
-            Image.network("${VoucherCubit.get(context).voucher!.data[index].voucherPhoto}")
+            Image.network(
+              fit:BoxFit.cover,
+                "${VoucherCubit.get(context).voucher!.data[index].voucherPhoto}")
             // CircleAvatar(
             //   backgroundImage: AssetImage(
             //       '${image.img}'),
@@ -246,12 +249,12 @@ Widget BuildItem(int index) {
           child: Text(
             '${VoucherCubit.get(context).voucher!.data[index].voucherName}',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        SizedBox(height: 10),
+
         Text(
           '${VoucherCubit.get(context).voucher!.data[index].voucherPoints}',
           style: TextStyle(
@@ -260,7 +263,7 @@ Widget BuildItem(int index) {
             color: Colors.green[500],
           ),
         ),
-        SizedBox(height: 5),
+
         InkWell(
           onTap: (){
             CacheHelper.saveData(key: '_id', value: VoucherCubit.get(context).voucher!.data[index].id);
@@ -277,7 +280,7 @@ Widget BuildItem(int index) {
           },
           child: Container(
             width: 100,
-            height: 50,
+            height: 40,
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.circular(20)

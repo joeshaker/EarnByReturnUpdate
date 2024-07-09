@@ -183,13 +183,7 @@ class _ProflieScreenState extends State<ProflieScreen> {
                           child: InkWell(
                             onTap: () {
                               if (Profile[index].shouldNavigate??true) {
-                                if(Profile[index].text1=="Logout"){
-                                  CacheHelper.clearData(key: 'token');
-                                  CacheHelper.clearData(key: 'role');
 
-
-
-                                }
 
                                 if(index==Profile.length-2){
                                   if(Role=="admin"){
@@ -208,6 +202,10 @@ class _ProflieScreenState extends State<ProflieScreen> {
 
                                 }
                                 else{
+                                  if(index==Profile.length-1){
+                                    CacheHelper.clearData(key: 'token');
+                                    CacheHelper.clearData(key: 'role');
+                                  }
                                   navigateTo(context, Screens[index]);
                                 }
 
