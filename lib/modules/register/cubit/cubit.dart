@@ -34,12 +34,19 @@ class RegisterCubit extends Cubit<Registerstates> {
     })
         .then((value) {
       print(value.data);
-      registerModel = LoginModel.fromJson(value.data);
-      CacheHelper.saveData(key: 'token', value: value.data['token']);
-      print( value.data['token']);
-      print(CacheHelper.getData(key: 'token'));
-      emit(RegisterSuccessstate(registerModel));
-      print(value.statusCode );
+      if(value.statusCode==201){
+        registerModel = LoginModel.fromJson(value.data);
+        CacheHelper.saveData(key: 'token', value: value.data['token']);
+        print( value.data['token']);
+        print(CacheHelper.getData(key: 'token'));
+        print(value.statusCode );
+        emit(RegisterSuccessstate(registerModel));
+      }else{
+        emit(RegisterErrorstate("Plase Provide a Valid data","Plase Provide a Valid data"));
+
+      }
+
+
     }).catchError((error) {
 
       print(error);

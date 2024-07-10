@@ -20,11 +20,14 @@ class CheckEmailCubit extends Cubit<CheckEmailstates> {
         data: {'email': email, 'verificationCode': code}).then((value) {
       print(value.data);
       print(value.statusCode);
-      CacheHelper.saveData(key: 'token',value: value.data['resetToken']);
+
       if (value.statusCode == 200) {
         print(value.data['resetToken']);
-
+        CacheHelper.saveData(key: 'token',value: value.data['resetToken']);
         emit(CheckEmailSuccessstate(value.data['status']));
+
+      }else{
+        emit(CheckEmailErrorstate(value.data['message'],value.data['message']));
       }
     }).catchError((error) {
       print(error);

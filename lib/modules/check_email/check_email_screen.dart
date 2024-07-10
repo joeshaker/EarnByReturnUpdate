@@ -16,7 +16,7 @@ import '../login/login_screen.dart';
 class CheckEmailScreen extends StatelessWidget {
   String email;
   String comeFrom;
-   late String code;
+  late String code;
   CheckEmailScreen({super.key, required this.email, required this.comeFrom});
 
   @override
@@ -85,7 +85,6 @@ class CheckEmailScreen extends StatelessWidget {
                       height: 15,
                     ),
                     VerificationCode(
-
                       textStyle: TextStyle(fontSize: 20.0, color: Colors.black),
                       keyboardType: TextInputType.number,
                       underlineColor:
@@ -108,9 +107,7 @@ class CheckEmailScreen extends StatelessWidget {
                       height: 30,
                     ),
                     ConditionalBuilder(
-
                         condition: state is! CheckEmailLoadingstate,
-
                         builder: (context) => defaultButton(
                             // clickable: clickable,
                             width: 320,
@@ -120,17 +117,11 @@ class CheckEmailScreen extends StatelessWidget {
                             clickable: true,
                             background: true ? defaultColor : Colors.grey,
                             function: () {
+                              print("helllooo this coddeeee $code");
+                              CheckEmailCubit.get(context).userCheckEmail(
+                                  email: email, code: int.parse(code));
 
-                                   print("helllooo this coddeeee $code");
-                                  CheckEmailCubit.get(context).userCheckEmail(
-                                      email: email,
-                                    code: int.parse(code)
-                                     );
-
-
-
-
-                                ;
+                              ;
 
                               ;
                             },
@@ -147,7 +138,9 @@ class CheckEmailScreen extends StatelessWidget {
                       height: 1,
                     ),
                     defaultTextButton(
-                        function: () {},
+                        function: () {
+                          navigateTo(context, RegisterScreen());
+                        },
                         text: "Resend code",
                         color: defaultColor,
                         fontSize: 14)
