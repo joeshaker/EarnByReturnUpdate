@@ -65,7 +65,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-
           children: [
             Expanded(
               child: PageView.builder(
@@ -151,8 +150,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         height: 40,
       ),
       Container(
-        height: 300,
-        width: 300,
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.4,
+        // width: 300,
         child:
         Image(fit: BoxFit.cover, image: AssetImage('${model.image}')),
       ),

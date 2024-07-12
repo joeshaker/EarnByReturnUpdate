@@ -227,6 +227,7 @@ Color chooseToastColor({required ToastStates state}) {
 }
 Widget elevatedButtonWithPic(
 {
+  required BuildContext context,
   required  String image,
   required  String text,
 
@@ -234,35 +235,43 @@ Widget elevatedButtonWithPic(
     )
 {
 
-  return  ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor:MaterialStateProperty.all(Colors.white) ,
-          elevation: MaterialStateProperty.all(5.0),
-          fixedSize: MaterialStateProperty.all(Size(150, 45)),
-          padding: MaterialStateProperty.all(
-               EdgeInsets.all(7.0)),
-          overlayColor: MaterialStateProperty.all(Colors.grey[100])
-      ),
-      onPressed: () {},
-      child:  Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image(image: AssetImage(image),
-            height: 25,
-            fit: BoxFit.fill,
-            width: 25,),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal
-              ),
-              text)
-        ],
-      ));
+  return  Container(
+    constraints:BoxConstraints(
+      minWidth:  MediaQuery.of(context).size.width*0.3
+
+    ) ,
+    padding: EdgeInsets.all(10),
+    decoration: BoxDecoration(color: Colors.white,
+
+          boxShadow: [
+
+            BoxShadow(color: Colors.grey.withOpacity(0.5),
+            blurRadius: 5,
+            ),
+
+
+        ]
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Image(image: AssetImage(image),
+          height: 25,
+          fit: BoxFit.fill,
+          width: 25,),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal
+            ),
+            text)
+      ],
+    ),
+  );
 }
 
 class mapItems{

@@ -63,7 +63,8 @@ class _RedeemscreenState extends State<Redeemscreen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.43,
+                  height: MediaQuery.of(context).size.height / 1.53,
+
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: GridView.builder(
@@ -101,7 +102,6 @@ class _RedeemscreenState extends State<Redeemscreen> {
   Widget _buildItem(BuildContext context, UserData userData) {
     return Container(
       width: 100,
-      height: 215,
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -109,12 +109,13 @@ class _RedeemscreenState extends State<Redeemscreen> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
             width: 190,
-            height: 200,
+            height: 140,
             decoration: BoxDecoration(
+
               borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
@@ -134,7 +135,6 @@ class _RedeemscreenState extends State<Redeemscreen> {
               ),
             ),
           ),
-          SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

@@ -86,10 +86,10 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         Container(
                             height: 150,
-                            width: 150,
+                            width: MediaQuery.of(context).size.width*0.7,
                             child: Image(
-                                fit: BoxFit.cover,
-                                image: AssetImage('assets/images/logo.jpg'))),
+                                fit: BoxFit.contain,
+                                image: AssetImage('assets/images/logo.png'))),
                         SizedBox(
                           height: 30,
                         ),
@@ -97,9 +97,12 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             elevatedButtonWithPic(
+                                context: context,
+
                                 text: "Facebook",
                                 image: "assets/images/facebook.jpg"),
                             elevatedButtonWithPic(
+                              context: context,
                                 text: "Google",
                                 image: "assets/images/google.jpg"),
                           ],
@@ -140,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                         defaultTextForm(
                           controller: passwordController,
                           label: "Password",
-                          hintText: 'ENTER YOUR Password',
+                          hintText: '',
                           isPassword: LoginCubit.get(context).passwordVisable,
                           suffixicon: LoginCubit.get(context).suffix,
                           type: TextInputType.visiblePassword,
