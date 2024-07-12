@@ -52,7 +52,6 @@ class GainRewardScren extends StatelessWidget {
                 height:50,
               ),
               Container(
-
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.grey[300]
@@ -72,19 +71,19 @@ class GainRewardScren extends StatelessWidget {
                               image: AssetImage('assets/images/coins.png')),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 5,
                         ),
                         Column(
                           children: [
                             Container(
-                              height: 60,
+                              height: 30,
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   '${coins.toStringAsFixed(2)}',
                                   style: TextStyle(
                                       color: defaultColor,
-                                      fontSize: 30,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -107,9 +106,6 @@ width:2,
 
                       ),
 
-
-
-
                     ),//divder as line
                     Row(
                       children: [
@@ -117,35 +113,38 @@ width:2,
                           child: Image(
                               fit: BoxFit.cover,
                               height: 40,
-                              width: 40,
+                              width: 50,
                               image: AssetImage('assets/images/money.png')),
                         ),
                         SizedBox(
                           width: 10,
                         ),
-                        Container(
-                          height: 70,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: FittedBox(
-                                  child: Container(
-                                    child: Text(
-                                      '${money.toStringAsFixed(2)}',
-                                      style: TextStyle(
-                                          color: defaultColor,
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(top:20),
+                          child: Container(
+                            height: 70,
+                            child: Column(
+                              children: [
+                                Flexible(
+                                  child: FittedBox(
+                                    child: Container(
+                                      child: Text(
+                                        '${money.toStringAsFixed(2)}',
+                                        style: TextStyle(
+                                            color: defaultColor,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Text(
-                                'Pounds',
-                                style:
-                                TextStyle(color: Colors.black, fontSize: 16),
-                              )
-                            ],
+                                Text(
+                                  'Pounds',
+                                  style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                                )
+                              ],
+                            ),
                           ),
                         )
                       ],
