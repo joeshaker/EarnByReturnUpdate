@@ -84,7 +84,7 @@ class _HistoryscreenState extends State<Historyscreen> {
                       ),
                       SizedBox(height: 30,),
                       Container(
-                        height: 640,
+                        height: 580,
                         child: ListView.separated(
                             itemBuilder: (context, index) =>
                             buildContainerHistory(index),
