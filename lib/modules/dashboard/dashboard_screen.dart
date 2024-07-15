@@ -479,7 +479,7 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     Wrap(
                       spacing:
-                      13.0, // space between items in the same row
+                      10.0, // space between items in the same row
                       runSpacing: 16.0,
                       children: [
                         itemSquare(
